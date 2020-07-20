@@ -43,10 +43,7 @@ public class EquipamientoController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Equipamiento> createEquipamiento(@RequestParam("nombre") String nombre, @RequestParam("cantidad") int cantidad){
-        Equipamiento equipamiento = new Equipamiento();
-        equipamiento.setNombre(nombre);
-        equipamiento.setCantidad(cantidad);
+    public ResponseEntity<Equipamiento> createEquipamiento(@RequestBody Equipamiento equipamiento){
         equipamientoService.saveEquipamiento(equipamiento);
         return new ResponseEntity<Equipamiento>(equipamiento,HttpStatus.OK);
     }
@@ -64,7 +61,9 @@ public class EquipamientoController {
                 new_equipamiento.setNombre(old_equipamiento.getNombre());
             }
 
+            new_equipamiento.setTipo(equipamiento.getTipo());
             new_equipamiento.setCantidad(equipamiento.getCantidad());
+            new_equipamiento.setUbicacion(equipamiento.getUbicacion());
             equipamientoService.saveEquipamiento(equipamiento);
 
             equipamientoService.deleteEquipamiento(id);

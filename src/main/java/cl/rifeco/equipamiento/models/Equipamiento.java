@@ -14,29 +14,49 @@ public class Equipamiento {
     private Long id;
 
     private String nombre;
+    private String tipo;
+    private String ubicacion;
     private int cantidad;
 
     //Constructor
-    public Equipamiento(){} 
+    public Equipamiento(){}
 
     public Long getId(){
         return id;
     }
 
-    public String getNombre(){
+    public String getNombre() {
         return nombre;
     }
 
-    public int getCantidad(){
-        return cantidad;
-    }
-    
-    public void setNombre(String nombre){
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public void setCantidad(int cantidad){
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
+
+
     
 }
