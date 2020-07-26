@@ -2,7 +2,6 @@ package cl.rifeco.equipamiento.controllers;
 
 import cl.rifeco.equipamiento.models.Equipamiento;
 import cl.rifeco.equipamiento.services.EquipamientoService;
-// import net.bytebuddy.implementation.bytecode.assign.Assigner.EqualTypesOnly;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-// import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -45,31 +43,22 @@ public class EquipamientoController {
     @PostMapping("")
     public ResponseEntity<Equipamiento> createEquipamiento(@RequestBody Equipamiento equipamiento){
         equipamientoService.saveEquipamiento(equipamiento);
-        return new ResponseEntity<Equipamiento>(equipamiento,HttpStatus.OK);
+        return new ResponseEntity<Equipamiento>(equipamiento, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateEquipamiento(@PathVariable Long id, @RequestBody Equipamiento equipamiento){
-        Equipamiento old_equipamiento = equipamientoService.findEquipamientoById(id);
-        if (old_equipamiento != null){
-            Equipamiento new_equipamiento = new Equipamiento();
+        Equipamiento equipamiento_actual = equipamientoService.findEquipamientoById(id);
+        if (equipamiento_actual != null){
 
-            // Actualiza el nombre si es necesario
-            if(equipamiento.getNombre() != null){
-                new_equipamiento.setNombre(equipamiento.getNombre());
-            } else {
-                new_equipamiento.setNombre(old_equipamiento.getNombre());
-            }
-
-            new_equipamiento.setTipo(equipamiento.getTipo());
-            new_equipamiento.setCantidad(equipamiento.getCantidad());
-            new_equipamiento.setUbicacion(equipamiento.getUbicacion());
-            new_equipamiento.setEstado(equipamiento.getEstado());
-            equipamientoService.saveEquipamiento(equipamiento);
-
-            equipamientoService.deleteEquipamiento(id);
-
-            return new ResponseEntity<Equipamiento>(new_equipamiento, HttpStatus.OK);
+            equipamiento_actual.setNombre(equipamiento.getNombre() != null ? equipamiento.getNombre() : equipamiento_actual.getNombre());
+            equipamiento_actual.setTipo(equipamiento.getTipo() != null ? equipamiento.getTipo() : equipamiento_actual.getTipo());
+            equipamiento_actual.setUbicacion(equipamiento.getUbicacion() != null ? equipamiento.getUbicacion() : equipamiento_actual.getUbicacion());
+            equipamiento_actual.setEstado(equipamiento.getEstado() != null ? equipamiento.getEstado() : equipamiento_actual.getEstado());
+            
+            equipamientoService.saveEquipamiento(equipamiento_actual);
+            
+            return new ResponseEntity<Equipamiento>(equipamiento_actual, HttpStatus.OK);
         } else{
             return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
         }

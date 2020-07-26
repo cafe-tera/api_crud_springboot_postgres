@@ -17,7 +17,6 @@ public class Equipamiento {
     private String tipo;
     private String ubicacion;
     private String estado;
-    private int cantidad;
 
     // Constructor
     public Equipamiento() {
@@ -27,6 +26,10 @@ public class Equipamiento {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     public String getNombre() {
         return nombre;
     }
@@ -49,14 +52,6 @@ public class Equipamiento {
 
     public void setUbicacion(String ubicacion) {
         this.ubicacion = ubicacion;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
     }
 
     public String getEstado() {
