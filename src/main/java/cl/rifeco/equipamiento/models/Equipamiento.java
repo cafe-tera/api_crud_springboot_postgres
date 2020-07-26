@@ -8,7 +8,7 @@ import javax.persistence.Id;
 @Entity
 public class Equipamiento {
 
-    //Atributos
+    // Atributos
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -16,15 +16,20 @@ public class Equipamiento {
     private String nombre;
     private String tipo;
     private String ubicacion;
-    private int cantidad;
+    private String estado;
 
-    //Constructor
-    public Equipamiento(){}
+    // Constructor
+    public Equipamiento() {
+    }
 
-    public Long getId(){
+    public Long getId() {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     public String getNombre() {
         return nombre;
     }
@@ -49,14 +54,12 @@ public class Equipamiento {
         this.ubicacion = ubicacion;
     }
 
-    public int getCantidad() {
-        return cantidad;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
-
-    
 }
